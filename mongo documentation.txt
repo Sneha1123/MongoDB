@@ -17,7 +17,7 @@ To enter into shell:
 >mongo
 
 To check the number of databases:
->show dbs
+>show dbs/show databases
 
 Create new DB:
 >use databasename
@@ -26,17 +26,95 @@ To check which current DB ur in:
 >db
 
 -----------------------------------------------------------------------------------------------------------
+CREATE USER:
 
+db.createUser({
+	 user: "Sneha",
+	pwd:"1234",
+	roles:["readWrite", "dbAdmin"]
+});
+
+-----------------------------------------------------------------------------------------------------------
+CREATE COLLECTIONS:
+db.createCollection('Customer');
+
+show collections	//to show the collections
+
+-----------------------------------------------------------------------------------------------------------
+INSERTING DATA:
+
+db.collection_name.insert({
+	first_name:"sneha",
+	last_name:"A",
+	memberships:["mem1", "mem2"],
+})
+
+To show the values:
+db.collection_name.find();
+db.customer.find().pretty();
+-------------------------------------------------------------------------------------------------------------
+UPDATING:
+
+ db.customer.update({first_name:"test"},{first_name:"test", last_name:"A", gender:"female",role:"dev"});
+ 
+ If dont wanna write the whole thing then use $set:{}
+  db.customer.update({first_name:"sana"},{$set:{dev:"manager"}});
+  
+ Incrementing the values
+ db.customer.update({first_name:"sana"},{$set:{age:24}});
+ db.customer.update({first_name:"sana"},{$inc:{age:2}});
+ 
+ To remove a field(unset):
+ db.customer.update({first_name:"sana"},{$unset:{age:1}});
+ 
+ To rename a field:
+ db.customer.update({first_name:"sana"},{$rename:{"gender":"sex"}});
+ 
+------------------------------------------------------------------------------------------------------------------
+UPSURTING:
+db.customer.update({first_name:"test01"},{first_name:"test01", last_name:"A"},{upsert:"true"});
+
+---------------------------------------------------------------------------------------------------------------------
+REMOVING RECORDS:
+db.customer.remove({first_name:"test01"});
+
+TO remove only one of the records having same first_name:
+db.customer.remove({first_name:"test01"},{justOne:true});
+
+---------------------------------------------------------------------------------------------------------------------
+CRITERIA BASED SEARCH:
+
+db.customer.find({first_name:"test01"});
+db.customer.find({$or:[{first_name:"test01"},{first_name:"sana"}]).pretty();
+db.customer.find({age:{$gt:20}});
+db.customer.find().limit(4);	//gives first 4 values
+---------------------------------------------------------------------------------------------------------------------
+SORTING:
+db.customer.find().sort({last_name:1});	//ascending
+db.customer.find().sort({last_name:-1});	//descending
+
+--------------------------------------------------------------------------------------------------------------------
+COUNT:
+db.customer.find().count();
+
+-------------------------------------------------------------------------------------------------------------------
+ITERATE USING FOREACH:
+db.customer.find().forEach(function(doc){print("customer name: "+doc.first_name)});
+
+--------------------------------------------------------------------------------------------------------------------
 Document : In form of JSON
 
 {
 	first_name:"sneha",
 	last_name:"A",
-	memberships:["mem1", "mem2"],
+	memberships:["mem1", "mem2"],	//array of values
 	address:{
+			street:"4th main",	
+			city:"Boston",
 			
 			
-		}
+		},	//objects as values
+	contacts:[{name:"brad",relationship:"friend"}, {name:"joe",relationship:"father"}]	//array of objects	
 
 }
 ---------------------------------------------------------------------------------------------------------------
