@@ -1,0 +1,42 @@
+MongoDB
+
+Installing:
+
+cd C:
+cd mongodb/bin
+mongod --directoryperdb --dbpath C:\mongodb\data\db --logpath C:\mongodb\mongo.log --logappend --rest --install
+
+--------------------------------------------------------------------------------------------------------------
+Start Mongodb:
+
+net start MongoDB
+
+
+------------------------------------------------------------------------------------------------------------
+To enter into shell:
+>mongo
+
+To check the number of databases:
+>show dbs
+
+Create new DB:
+>use databasename
+
+To check which current DB ur in:
+>db
+
+-----------------------------------------------------------------------------------------------------------
+
+Document : In form of JSON
+
+{
+	first_name:"sneha",
+	last_name:"A",
+	memberships:["mem1", "mem2"],
+	address:{
+			
+			
+		}
+
+}
+---------------------------------------------------------------------------------------------------------------
