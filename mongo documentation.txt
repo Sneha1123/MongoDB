@@ -4,7 +4,7 @@ Installing:
 
 cd C:
 cd mongodb/bin
-mongod --directoryperdb --dbpath C:\mongodb\data\db --logpath C:\mongodb\mongo.log --logappend --rest --install
+mongod --directoryperdb --dbpath C:\mongodb\data\db --logpath C:\mongodb\log\mongo.log --logappend --rest --install
 
 --------------------------------------------------------------------------------------------------------------
 Start Mongodb:
